@@ -1,0 +1,28 @@
+<%- include('./Parts/header')%>
+<%- include('./Parts/navbar')%> 
+
+<div class="container mt-5">
+    <form method="POST" action="/login">
+        <div class="mb-3">
+          <label for="email" class="form-label">Email address</label>
+          <input type="email" class="form-control" id="email" name="email">
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">Password</label>
+          <input type="password" class="form-control" id="password" name="password">
+        </div>
+        <div class="mt-4 d-flex flex-column align-items-center">
+            <button type="submit" class="btn btn-primary">signup</button>
+            <p class="mt-2">do you not have an account ? <a href="/signup">signup</a> </p>
+        </div>
+        <% if(authError){ %>
+          <div class="alert alert-warning alert-dismissible fade show text-center" role="alert">
+            <strong> <%= authError %></strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        <% } %>
+        
+    </form>
+</div>
+
+<%- include('./Parts/footer')%> 

@@ -1,0 +1,54 @@
+<%- include('./Parts/header')%>
+<%- include('./Parts/navbar')%> 
+
+<div class="container mt-5">
+    <form method="POST" action="/signup" novalidate>
+        <div class="mb-3">
+            <label for="username" class="form-label">username</label>
+            <input type="text" class="form-control" id="username" name="username">
+            <% validationErrors.map(index => {if(index.param === 'username'){ %>
+              <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <span> <%= index.msg  %></span>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+            <%}})%>
+          </div>
+        <div class="mb-3">
+          <label for="email" class="form-label">Email address</label>
+          <input type="email" class="form-control" id="email" name="email">
+          <% validationErrors.map(index => {if(index.param === 'email'){ %>
+              <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <span> <%= index.msg  %></span>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+          <%}})%>
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">Password</label>
+          <input type="password" class="form-control" id="password" name="password">
+          <% validationErrors.map(index => {if(index.param === 'password'){ %>
+              <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <span> <%= index.msg  %></span>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+          <%}})%>
+        </div>
+        <div class="mb-3">
+            <label for="confirmPassword" class="form-label">confirm Password</label>
+            <input type="password" class="form-control" id="confirmPassword" name="confirmPassword">
+            <% validationErrors.map(index => {if(index.param === 'confirmPassword'){ %>
+              <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <span> <%= index.msg  %></span>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+            <%}})%>
+          </div>
+        <div class="mt-4 d-flex flex-column align-items-center">
+            <button type="submit" class="btn btn-primary">signup</button>
+            <p class="mt-2">already have account ? <a href="/login">login</a> </p>
+        </div>
+        
+    </form>
+</div>
+
+<%- include('./Parts/footer')%> 

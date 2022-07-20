@@ -1,0 +1,71 @@
+<%- include('./Parts/header')%>
+<%- include('./Parts/navbar')%> 
+
+<div class="container">
+  <h1 class="text-center">Add product</h1>
+</div>
+
+<div class="container mt-5">
+    <form method="POST" action="/add" enctype="multipart/form-data">
+        <div class="mb-3">
+          <label for="name" class="form-label">name</label>
+          <input type="text" class="form-control" id="name" name="name">
+          <% errorCreatingOneProduct.map(index => {if(index.param === 'name'){ %>
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+              <span> <%= index.msg  %></span>
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+          <%}})%>
+        </div>
+        <div class="mb-3">
+          <label for="price" class="form-label">price</label>
+          <input type="number" class="form-control" id="price" name="price">
+          <% errorCreatingOneProduct.map(index => {if(index.param === 'price'){ %>
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+              <span> <%= index.msg  %></span>
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+          <%}})%>
+        </div>
+        <div class="mb-3">
+          <label for="description" class="form-label">description</label>
+          <textarea class="form-control" id="description" name="description"></textarea>
+          <% errorCreatingOneProduct.map(index => {if(index.param === 'description'){ %>
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+              <span> <%= index.msg  %></span>
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+          <%}})%>
+        </div>
+        <div class="mb-3">
+          <label for="category" class="form-label">category</label>
+          <select class="form-select" name="category" >
+            <option selected disabled>Choose Category...</option>
+            <option value="computers">computers</option>
+            <option value="clothes">clothes</option>
+            <option value="electronics">electronics</option>
+          </select>
+          <% errorCreatingOneProduct.map(index => {if(index.param === 'category'){ %>
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+              <span> <%= index.msg  %></span>
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+          <%}})%>
+        </div>
+        <div class="mb-3">
+          <label for="formFile" class="form-label">file input</label>
+          <input class="form-control" type="file" id="formFile" name="image">
+          <% errorCreatingOneProduct.map(index => {if(index.param === 'image'){ %>
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+              <span> <%= index.msg  %></span>
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+          <%}})%>
+        </div>
+        <div class="mt-4 d-flex flex-column align-items-center">
+          <button type="submit" class="btn btn-primary">add product</button>
+        </div>
+    </form>
+</div>
+
+<%- include('./Parts/footer')%> 

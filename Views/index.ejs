@@ -1,0 +1,30 @@
+<%- include('./Parts/header')%>
+<%- include('./Parts/navbar')%> 
+
+<div class="container mt-5">
+    <% if(successAuth){ %>
+        <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
+          <strong> <%= successAuth %></strong>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      <% } %>
+</div>
+
+<div class="container mt-5">
+  <% if(successCreatingOneProduct){ %>
+      <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
+        <strong> <%= successCreatingOneProduct %></strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    <% } %>
+</div>
+
+<%# choose category %>
+<%- include('./Home/categoriesForm') %> 
+<%# choose category %>
+
+<%# get all products in card%>
+<%- include('./Home/products') %> 
+<%# get all products in card%>
+
+<%- include('./Parts/footer')%> 

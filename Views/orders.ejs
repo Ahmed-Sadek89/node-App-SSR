@@ -1,0 +1,99 @@
+<%- include('./Parts/header')%>
+<%- include('./Parts/navbar')%> 
+
+<div class="container">
+  <h1 class="text-center">orders</h1>
+</div>
+
+<% if(createOneOrderSuccess){ %>
+  <div class="container mt-5">
+      <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
+          <strong> <%= createOneOrderSuccess %></strong>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+  </div>
+<% } %> 
+
+<% if(createAllOrdersSuccess){ %>
+  <div class="container mt-5">
+      <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
+          <strong> <%= createAllOrdersSuccess %></strong>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+  </div>
+<% } %> 
+
+<% if(cancelOneOrderSuccess){ %>
+  <div class="container mt-5">
+      <div class="alert alert-danger alert-dismissible fade show text-center" role="alert">
+          <strong> <%= cancelOneOrderSuccess %></strong>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+  </div>
+<% } %>
+
+<% if(cancelAllOrdersSuccess){ %>
+  <div class="container mt-5">
+      <div class="alert alert-danger alert-dismissible fade show text-center" role="alert">
+          <strong> <%= cancelAllOrdersSuccess %></strong>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+  </div>
+<% } %>
+<div class="container mt-5">
+  <table class="table table-dark table-hover table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">product name</th>
+        <th scope="col">amount</th>
+        <th scope="col">cost</th>
+        <th scope="col">address</th>
+        <th scope="col">status</th>
+        <th scope="col">time</th>
+        <th scope="col">options</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if(result.length === 0){ %>
+        <tr>
+          <th scope="row">1</th>
+          <td colspan="7" class="table-active"><strong class="text-warning">no products are ordered</strong></td>
+        </tr>
+      <% }else{ %>
+        <% result.map((element, index) => { %>
+          <tr>
+            <th scope="row"><%= result.length - index%></th>
+            <td><%= element.name %></td>
+            <td><%= element.amount %></td>
+            <td><%= element.amount * element.price %></td>
+            <td><%= element.address %></td>
+            <% if(element.status === 'pending'){ %> 
+              <td class="text-warning"><%= element.status %></td>
+            <% }else{ %>
+              <td class="text-success"><%= element.status %></td>
+            <% } %>  
+            <td><%= moment(element.timeStamp).format("MMMM Do YYYY, h:mm:ss a") %></td>
+            <form novalidate>
+              <td>
+                <input type="hidden" name="orderId" value="<%= element._id %>">
+                <input type="hidden" name="orderName" value="<%= element.name %>">
+                <input type="submit" class="btn btn-danger" formmethod="POST" value="cancel" formaction="/orders/cancel" />
+              </td>
+            </form>
+          </tr>
+        <% }) %>
+      <% } %>  
+    </tbody>
+  </table>
+  <% if(result.length > 0){ %>
+    <form class="d-flex flex-row justify-content-end align-items-center" method="POST">
+      <span class="text-xl-center mx-2" >
+        total: <strong><%= totalAmountInOrders %></strong>
+      </span>
+      <button class="btn btn-danger" formaction="/orders/cancel_all">cancel all</button>
+    </form>
+    <% } %>
+</div>
+
+<%- include('./Parts/footer')%> 

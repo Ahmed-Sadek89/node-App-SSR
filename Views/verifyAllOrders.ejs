@@ -1,0 +1,29 @@
+<%- include('./Parts/header')%>
+<%- include('./Parts/navbar')%> 
+
+<div class="container">
+  <h1 class="text-center">verify all orders</h1>
+</div>
+
+<% createAllOrdersFaild.map(error => { %>
+  <div class="container">
+      <div class="alert alert-warning alert-dismissible fade show" role="alert">
+      <span> <%= error.msg  %></span>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+  </div>
+<%})%>
+
+<div class="container mt-5">
+  <form method="POST" action="/orders/verifyAllOrders" novalidate>
+    <div class="mb-3">
+      <label for="username" class="form-label">enter your address:</label>
+      <input type="text" class="form-control" name="address">
+    </div>
+    <div class="mb-3 d-flex justify-content-center">
+      <input type="submit" class="btn btn-success" value="order all the products">
+    </div>
+  </form>
+</div>
+
+<%- include('./Parts/footer')%> 

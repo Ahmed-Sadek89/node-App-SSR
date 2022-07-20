@@ -1,0 +1,19 @@
+*{
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
+}
+*, input[type='submit'], button{
+    text-transform: capitalize;
+}
+input{
+    text-transform: lowercase;
+}
+a{
+    text-decoration: none;
+}
+.myCard{
+    width: 100%;
+    margin-bottom: 20px; 
+}
+

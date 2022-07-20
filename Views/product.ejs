@@ -1,0 +1,53 @@
+<%- include('./Parts/header')%>
+<%- include('./Parts/navbar')%> 
+
+<% if(product){%>
+  <div class="container mt-5 mb-5">
+    <% errorAmount.map(error => { %>
+      <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <span> <%= error.msg  %></span>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    <%})%>
+    <div class="row">
+        <div class="col-xs-12 col-md-6">
+            <div class="card" style="width: 100%" >
+                <img src="/<%= product.image%>" class="card-img-top" alt="product<%= product._id%>">
+                <div class="card-body">
+                  <p class="card-text">Price: <%= product.price%>$</p>
+                  <form method="POST" action="/cart">
+                    <input type="hidden" name="productId" value="<%= product._id %>">
+                    <input type="hidden" name="name" value="<%= product.name %>">
+                    <input type="hidden" name="price" value="<%= product.price %>">
+                    <div class="mb-3">
+                      <input type="number" placeholder='amount' name="amount" class="form-control">
+                    </div>
+                    <input type="hidden" name="redirectTo" value="/product/<%= product._id %>">
+
+                    <button type="submit" class="btn btn-primary">add to cart</button>
+                  </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-md-6">
+            <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title"><%= product.name%></h5>
+                  <p class="card-text"><%= product.description%></p>
+                </div>
+            </div>  
+        </div>
+
+    </div>
+  </div>
+<% }else{%>
+  <div class="container">
+    <div class="alert alert-danger mt-3" role="alert">
+      there is no product !
+    </div>
+  </div>
+<% }%>
+
+
+<%- include('./Parts/footer')%> 

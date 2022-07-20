@@ -1,0 +1,39 @@
+<div class="mt-5 container">
+    <% errorAmount.map(error => { %>
+      <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <span> <%= error.msg  %></span>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    <%})%>
+    <div class="row ">
+      <% if(products.length < 1){ %>
+        <div class="alert alert-danger mt-3" role="alert">
+          there is no product in this category!
+        </div>
+      <%}else{ %> 
+        <% products.map((index) => {%>
+            <div class=" col-xs-12 col-sm-6 col-md-3">
+                <div>
+                    <div class="card myCard" >
+                        <img style="height: 300px" src="./<%= index.image%>" class="card-img-top" alt="product<%= index._id%>">
+                        <div class="card-body">
+                          <a href="/product/<%= index._id %> " class="card-link"><%= index.name%></a>
+                          <p class="card-text">Price: <%= index.price%>$</p>
+                          <form method="POST" action="/cart">
+                            <input type="hidden" name="productId" value="<%= index._id %>">
+                            <input type="hidden" name="name" value="<%= index.name %>">
+                            <input type="hidden" name="price" value="<%= index.price %>">
+                            <div class="mb-3">
+                              <input type="number" placeholder='amount' name="amount" class="form-control">
+                            </div>
+                            <input type="hidden" name="redirectTo" value="/">
+                            <button type="submit" class="btn btn-primary">add to cart</button>
+                          </form>
+                        </div>
+                      </div>
+                </div>
+            </div>
+        <%})%>
+      <% } %> 
+    </div>
+</div>
